@@ -1,0 +1,108 @@
+body {     
+    background: #111;     
+    width:  100%;
+    height: 100%;
+    margin: 0;
+}
+
+input[type="range"] {
+    width: 300px;
+    accent-color: #00ffaa;          
+  }
+
+
+
+  #gl-canvas {
+    position: absolute;
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+  }
+
+
+  #master-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+  }
+
+
+
+
+  #top-row-container {
+    /* display: none; */
+    display: flex;
+    flex-direction: row;
+    /* border: 2px solid rgb(57, 80, 129); */
+    border-radius: 5px;
+    margin : 20px;
+    height: 70vh;
+  }
+
+  .top-row-panel {
+    /* display: none; */
+    margin: 10px;
+    position: relative;           
+    z-index:0;
+    /* border: 2px solid rgb(57, 80, 129); */
+    border-radius: 5px;
+    
+  }
+
+  #top-row-left-panel { 
+    flex-grow: 1;    
+  }
+
+
+  #top-row-right-panel { 
+    width: 0%;    
+    transition: width 0.5s ease;
+    overflow: hidden;
+  }
+
+
+
+  #bottom-row-container {
+    /* display: none; */
+    /* border: 2px solid rgb(57, 80, 129); */
+    border-radius: 5px;
+    margin : 20px;
+    }
+
+
+
+
+  .card-text {
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+    line-height: 2;
+    font-family: "Comic Sans MS", sans-serif; 
+    position: relative;
+    display: block;
+    color: rgb(18, 33, 83);      
+    z-index: 2;  
+    max-width: 80ch;
+    /* filter: drop-shadow(0 0 2rem rgb(92, 140, 187));     */
+    mix-blend-mode: difference;     
+    overflow: hidden;
+  }
+
+
+  #text-main {
+    mix-blend-mode: difference; 
+    margin-left: 10px;
+    line-height: 2;
+    font-family: "Comic Sans MS", sans-serif; 
+    position: relative;
+    display: block;
+    color: rgb(141, 162, 234);      
+    z-index: 2;  
+    max-width: 80ch;
+    filter: drop-shadow(0 0 2rem rgb(92, 140, 187));    
+  }
+
+
