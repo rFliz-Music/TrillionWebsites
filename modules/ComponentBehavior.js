@@ -1,115 +1,46 @@
 // =============================
-// IconBehavior.js
+// Icon Behavior
 // =============================
-export function attachIconBehavior(icon, cx, cy, phase = 0) {
-        const baseAngle = 0;      // center rotation
-        const amplitude = 10;      // swing range
-        const speed = 1;        // radians/sec (lower = slower)
-      
-        function animate(time) {
-          const t = time / 1000;
-          const angle = baseAngle + amplitude * Math.sin(t * speed + phase);
-          icon.setAttribute("transform", `rotate(${angle}, ${cx}, ${cy})`);
-          requestAnimationFrame(animate);
-        }
-      
-        requestAnimationFrame(animate);
-      
-        // placeholder events
-        icon.addEventListener("mouseenter", () => {});
 
-        icon.addEventListener("mouseleave", () => {});
+export function attach_IconBehavior(icon, cx, cy, phase = 0, label, name) {
+  const baseAngle = 0;      // center rotation
+  const amplitude = 15;      // swing range
+  const speed = 0.7;           // radians/sec (lower = slower)
+  
 
-        icon.addEventListener("click", (e) => {
-          console.log("Clicked Icon")
-          e.stopPropagation(); // 🧱 Prevents the click from bubbling to the container          
-          document.querySelector("#top-row-right-panel").style.width = "30%";                   
-        });
-      }
+  // ================= ANIMATION =================
+  function animate(time) {
+    const t = time / 1000;
+    const angle = baseAngle + amplitude * Math.sin(t * speed + phase);
+    icon.setAttribute("transform", `rotate(${angle}, ${cx}, ${cy})`);
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
 
+  // ================= EVENTS =================  
 
-// =============================
-// IconBehavior.js
-// =============================
-// export function attachIconBehavior(svg, iconElement, labelText, cx, cy, phase = 0) {
-//   const baseAngle = 0;      // center rotation
-//   const amplitude = 10;     // swing range
-//   const speed = 1;          // radians/sec (lower = slower)
-
-//   // === Create label ===
-//   const svgNS = "http://www.w3.org/2000/svg";
-//   const group = document.createElementNS(svgNS, "g");
-
-//   // Move icon inside its group
-//   iconElement.remove(); 
-//   group.appendChild(iconElement);
-
-//   // Create arc path for label
-//   const arcId = `label-arc-${Math.random().toString(36).substr(2, 8)}`;
-//   const arcRadius = 10;
-//   const arcPath = document.createElementNS(svgNS, "path");
-//   arcPath.setAttribute("id", arcId);
-
-//   const startAngle = -Math.PI / 2 - 0.8;
-//   const endAngle = -Math.PI / 2 + 0.8;
-//   const x1 = cx + arcRadius * Math.cos(startAngle);
-//   const y1 = cy + arcRadius * Math.sin(startAngle);
-//   const x2 = cx + arcRadius * Math.cos(endAngle);
-//   const y2 = cy + arcRadius * Math.sin(endAngle);
-//   const d = `M ${x1},${y1} A ${arcRadius},${arcRadius} 0 0,1 ${x2},${y2}`;
-
-//   arcPath.setAttribute("d", d);
-//   arcPath.setAttribute("fill", "none");
-//   arcPath.setAttribute("stroke", "none");
-//   group.appendChild(arcPath);
-
-//   const label = document.createElementNS(svgNS, "text");
-//   const textPath = document.createElementNS(svgNS, "textPath");
-//   textPath.setAttributeNS("http://www.w3.org/1999/xlink", "href", `#${arcId}`);
-//   textPath.textContent = labelText;
-//   label.appendChild(textPath);
-//   label.setAttribute("class", "icon-label");
-//   label.style.opacity = 0;
-//   label.style.transition = "opacity 0.3s ease";
-//   label.style.fontSize = "3px";
-//   label.style.fontFamily = "sans-serif";
-//   label.style.fill = "#222";
-//   group.appendChild(label);
-
-//   // Add group to SVG
-//   svg.appendChild(group);
-
-//   // === Animation loop ===
-//   function animate(time) {
-//     const t = time / 1000;
-//     const angle = baseAngle + amplitude * Math.sin(t * speed + phase);
-//     iconElement.setAttribute("transform", `rotate(${angle}, ${cx}, ${cy})`);
-//     requestAnimationFrame(animate);
-//   }
-//   requestAnimationFrame(animate);
-
-//   // === Events ===
-//   group.addEventListener("mouseenter", () => {
-//     label.style.opacity = 1;
-//   });
-
-//   group.addEventListener("mouseleave", () => {
-//     label.style.opacity = 0;
-//   });
-
-//   group.addEventListener("click", (e) => {
-//     e.stopPropagation(); // Prevent parent click
-//     console.log(`Clicked icon: ${labelText}`);
-//     document.querySelector("#top-row-right-panel").style.width = "30%";
-//   });
-// }
+    // Optional event handlers
+    icon.addEventListener("mouseenter", () => {
+      label.setAttribute("visibility", "visible")
+    });
+  
+    icon.addEventListener("mouseleave", () => {
+      label.setAttribute("visibility", "hidden")
+    });
 
 
-
-
-
-
-
+  icon.addEventListener("click", (e) => {
+    e.stopPropagation(); // Stop general click from propagating
+    console.log("Clicked Icon");
+    document.querySelector("#top-row-right-panel").style.width = "30%";
+    
+    for (let n = 0; n < 5; n++) {
+      const moon_element = document.querySelector(`#moon_${name}_${n}`);
+      moon_element.style.opacity = 1;
+    }
+    
+  });
+}
 
 
 
@@ -119,7 +50,7 @@ export function attachIconBehavior(icon, cx, cy, phase = 0) {
 
 
 // ==================== CURVE BEHAVIOR ====================
-export function attachCurveBehavior(path, basePoints) {
+export function attach_CurveBehavior(path, basePoints) {
         const amplitude = 0.7;   // how much to wiggle vertically
         const speed = 1.5;       // oscillation speed
         const phaseOffsets = [0, 1.3, 2.1, 3.7]; // each point moves slightly out of phase
@@ -167,3 +98,60 @@ export function attachCurveBehavior(path, basePoints) {
 
 
 
+
+
+
+
+
+
+// =============================
+// Curved Label
+// =============================
+
+// function createCurvedLabel(text, radius = 10, fontSize = 3) {
+//   const svgNS = "http://www.w3.org/2000/svg";
+//   const xlinkNS = "http://www.w3.org/1999/xlink";
+
+//   // Create main SVG element
+//   const svg = document.createElementNS(svgNS, "svg");
+//   svg.setAttribute("width", radius * 2 + fontSize * 2);
+//   svg.setAttribute("height", radius + fontSize * 2);
+//   svg.style.overflow = "visible";
+
+//   // Create unique path ID
+//   const pathId = `curvedPath_${Math.random().toString(36).substr(2, 9)}`;
+
+//   // Create a simple top-half arc path
+//   const startX = fontSize;
+//   const startY = radius;
+//   const endX = radius * 2 + fontSize;
+//   const endY = radius;
+
+//   const arcPath = document.createElementNS(svgNS, "path");
+//   // Quadratic Bezier for gentle smile curve
+//   arcPath.setAttribute(
+//       "d",
+//       `M${startX},${startY} Q${radius + fontSize},${startY + radius} ${endX},${endY}`
+//   );
+//   arcPath.setAttribute("id", pathId);
+//   arcPath.setAttribute("fill", "transparent");
+
+//   svg.appendChild(arcPath);
+
+//   // Create text element
+//   const textEl = document.createElementNS(svgNS, "text");
+//   const textPath = document.createElementNS(svgNS, "textPath");
+//   textPath.setAttributeNS(xlinkNS, "xlink:href", `#${pathId}`);
+//   textPath.setAttribute("startOffset", "50%");
+//   textPath.setAttribute("text-anchor", "middle");
+//   textPath.setAttribute("dominant-baseline", "middle");
+//   textPath.textContent = text;
+
+//   textEl.appendChild(textPath);
+//   textEl.setAttribute("font-size", fontSize);
+//   textEl.setAttribute("fill", "#333");
+
+//   svg.appendChild(textEl);
+
+//   return svg;
+// }

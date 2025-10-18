@@ -54,6 +54,7 @@ input[type="range"] {
 
   #top-row-left-panel { 
     flex-grow: 1;    
+    overflow: visible;
   }
 
 
@@ -73,6 +74,11 @@ input[type="range"] {
     }
 
 
+  .moon {
+      opacity: 0;
+      transition: opacity 0.5s ease-in
+  }
+
 
 
   .card-text {
@@ -80,7 +86,7 @@ input[type="range"] {
     height: 100%;
     margin: 10px;
     line-height: 2;
-    font-family: "Comic Sans MS", sans-serif; 
+    font-family: "Avenir Next", sans-serif; 
     position: relative;
     display: block;
     color: rgb(18, 33, 83);      
@@ -96,7 +102,7 @@ input[type="range"] {
     mix-blend-mode: difference; 
     margin-left: 10px;
     line-height: 2;
-    font-family: "Comic Sans MS", sans-serif; 
+    font-family: "Avenir Next", sans-serif; 
     position: relative;
     display: block;
     color: rgb(141, 162, 234);      

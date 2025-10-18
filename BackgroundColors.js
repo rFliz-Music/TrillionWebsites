@@ -37,7 +37,7 @@ const blobs = [];
 for (let i = 0; i < numBlobs; i++) {
     blobs.push({
         center: [Math.random(), Math.random()],
-        radius: 0.05 + Math.random() * 0.05,
+        radius: 0.05 + Math.random() * 0.1,
         // radius: 0.1,
         velocity: [Math.random() * 0.001, Math.random() * 0.001],
         color: [Math.random(), Math.random(), Math.random()] // RGB
