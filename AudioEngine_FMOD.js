@@ -35,7 +35,7 @@ function runFMOD() {
 
     // Get the event description
     const eventDesc = {};
-    check(studioSystem.getEvent("event:/testEvent", eventDesc));
+    check(studioSystem.getEvent("event:/MainMusic_play", eventDesc));
 
     // Create an instance of the event
     const eventInst = {};
@@ -47,28 +47,30 @@ function runFMOD() {
     // ========================================================================
 
     console.log("Event instance ready");
+    testEventInstance.start();
+    studioSystem.update();
 
-    // Wire button click to play the event
-    document.getElementById("start").addEventListener("click", () => {
-        testEventInstance.start();
-        studioSystem.update();
-        console.log("Event started!");
-    });
+    // // Wire button click to play the event
+    // document.getElementById("start").addEventListener("click", () => {
+    //     testEventInstance.start();
+    //     studioSystem.update();
+    //     console.log("Event started!");
+    // });
 
 
-    // Slider controls the global pitch parameter
-    document.getElementById("dial").addEventListener("input", e => {
-        const val = parseFloat(e.target.value);
-        if (studioSystem) {
-          studioSystem.setParameterByName("Pitch", val, false);
-          studioSystem.update();
-        }
-      });
+    // // Slider controls the global pitch parameter
+    // document.getElementById("dial").addEventListener("input", e => {
+    //     const val = parseFloat(e.target.value);
+    //     if (studioSystem) {
+    //       studioSystem.setParameterByName("Pitch", val, false);
+    //       studioSystem.update();
+    //     }
+    //   });
 
 
     // UPDATE FUNCTION
     update()    
-    setInterval(update, 2000); // Call every 2 seconds
+    setInterval(update, 100); // Call every 100 miliseconds
 
 }
 
@@ -79,10 +81,6 @@ function check(result) {
         throw new Error("FMOD error: " + FMOD.ErrorString(result));
     }
 }
-
-
-
-
 
 
 
@@ -108,26 +106,26 @@ function minimalFmodTick() {
 }
 
 
-// Prints the log onto the window display itself
-function printLog() {
-    const logOutput = document.getElementById("logOutput");
-    const logBuffer = [];
-    const MAX_LOGS = 10;
+// // Prints the log onto the window display itself
+// function printLog() {
+//     const logOutput = document.getElementById("logOutput");
+//     const logBuffer = [];
+//     const MAX_LOGS = 10;
   
-    ['log','warn','error'].forEach(type => {
-      const original = console[type];
-      console[type] = function(...args) {
-        original.apply(console, args);
+//     ['log','warn','error'].forEach(type => {
+//       const original = console[type];
+//       console[type] = function(...args) {
+//         original.apply(console, args);
   
-        const msg = args.join(' ');
-        logBuffer.push(msg);
+//         const msg = args.join(' ');
+//         logBuffer.push(msg);
   
-        if (logBuffer.length > MAX_LOGS) logBuffer.shift();
+//         if (logBuffer.length > MAX_LOGS) logBuffer.shift();
   
-        logOutput.textContent = logBuffer.join('\n');        
-      }
-    });
-}
+//         logOutput.textContent = logBuffer.join('\n');        
+//       }
+//     });
+// }
 
 
 

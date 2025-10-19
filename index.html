@@ -2,33 +2,64 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>WebGL Demo</title>
+    <title>Hello World Wide Web</title>
 
+    <!-- <script src="./fmod/fmodstudio.js"></script> -->
+    <!-- <script src="AudioEngine_FMOD.js"></script> -->
     <script src="BackgroundColors.js" type="module"></script>
-    <script src="PageRender.js" type="module"></script>
+    <script src="Page_Intro.js" type="module"></script>
+    <script src="Page_Main.js" type="module"></script>
     <link rel="stylesheet" href="stylesheet.css">
   </head>
   <body>    
 
   <canvas id="gl-canvas"></canvas>    
 
+  
+  <div id="introPage-container">
+    <div id="introPage_title">hello world wide web</div>
+    <div id="introPage_text_container">
+      <div id="introPage_text_main">
+        The WWW project merges the techniques of information retrieval and hypertext to make an easy but powerful global information system. The project started with the philosophy that much academic information should be freely available to anyone. It aims to allow information sharing within internationally dispersed teams, and the dissemination of information by support groups.
+      </div>      
+      <div id="introPage_text_quote">
+        — Tim Berners-Lee’s invitation to collaborators on the WorldWideWeb project (6 Aug 1991)
+      </div>
+    </div>    
+    <div id="introPage_button">
+      <img src="Icons/moon_0.png" style="width:100%; height: 100%;" >
+    </div>
+  </div>
+
 
   <div id="master-container">
       
-    <div id="top-row-container">
-        <div id="top-row-left-panel" class="top-row-panel"></div>    
-        <div id="top-row-right-panel" class="top-row-panel">
-          <div class="card-text">å
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nulla libero, interdum et sagittis sit amet, tempor eu nulla. Nullam rutrum sapien id ultrices ultrices. Phasellus eget mattis odio, et rutrum nisi. Aenean hendrerit mauris in ligula pretium, in tempor tortor aliquam. Pellentesque ac ipsum lectus. Suspendisse potenti. Vestibulum scelerisque, elit nec luctus sollicitudin, dui erat finibus mi, ut sagittis tortor justo sit amet urna. Vestibulum sodales tempus dolor, interdum hendrerit magna ullamcorper id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-          </div>          
+    <div id="left-column-container">
+        <div id="left-column-top-panel" class="left-column-panel"></div>    
+        <div id="left-column-bottom-panel" class="left-column-panel">
+
+        <div id="bottom-row-container">
+          <div id="text-main">      
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nulla libero, interdum et sagittis sit amet, tempor eu nulla. Nullam rutrum sapien id ultrices ultrices. Phasellus eget mattis odio, et rutrum nisi. Aenean hendrerit mauris in ligula pretium, in tempor tortor aliquam.
+          </div>      
+        </div>
+                  
         </div>
     </div>
 
-    <div id="bottom-row-container">
+    <div id="right-column-container" class="card-text">
+      <div id="sidePanel_title">TITLE</div>              
+      <div id="sidePanel_subtitle">subtitle</div>
+      <div id="sidePanel_year">1824 lol</div>
+      <div id="sidePanel_text">Placeholder Text</div>
+      <iframe id="sidePanel_embedded" src="" bp></iframe>
+    </div>     
+
+    <!-- <div id="bottom-row-container">
       <div id="text-main" class="card-text">      
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nulla libero, interdum et sagittis sit amet, tempor eu nulla. Nullam rutrum sapien id ultrices ultrices. Phasellus eget mattis odio, et rutrum nisi. Aenean hendrerit mauris in ligula pretium, in tempor tortor aliquam. Pellentesque ac ipsum lectus. Suspendisse potenti. Vestibulum scelerisque, elit nec luctus sollicitudin, dui erat finibus mi, ut sagittis tortor justo sit amet urna. Vestibulum sodales tempus dolor, interdum hendrerit magna ullamcorper id. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec nulla libero, interdum et sagittis sit amet, tempor eu nulla. Nullam rutrum sapien id ultrices ultrices. Phasellus eget mattis odio, et rutrum nisi. Aenean hendrerit mauris in ligula pretium, in tempor tortor aliquam.
       </div>      
-    </div>
+    </div> -->
 
   </div>    
 

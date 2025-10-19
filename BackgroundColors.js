@@ -19,7 +19,7 @@ uniform vec3 u_color;
 
 void main() {
     float d = distance(v_uv, u_center);
-    float edge = 0.6; // soft blur  
+    float edge = 0.9; // soft blur  
     float alpha = 1.0 - smoothstep(u_radius - edge, u_radius + edge, d);    
 
     vec3 finalColor = u_color;

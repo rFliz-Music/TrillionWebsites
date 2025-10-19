@@ -2,45 +2,45 @@
 // Icon Behavior
 // =============================
 
-export function attach_IconBehavior(icon, cx, cy, phase = 0, label, name) {
-  const baseAngle = 0;      // center rotation
-  const amplitude = 15;      // swing range
-  const speed = 0.7;           // radians/sec (lower = slower)
+// export function attach_IconBehavior(icon, cx, cy, phase = 0, label, name) {
+//   const baseAngle = 0;      // center rotation
+//   const amplitude = 15;      // swing range
+//   const speed = 0.7;           // radians/sec (lower = slower)
   
 
-  // ================= ANIMATION =================
-  function animate(time) {
-    const t = time / 1000;
-    const angle = baseAngle + amplitude * Math.sin(t * speed + phase);
-    icon.setAttribute("transform", `rotate(${angle}, ${cx}, ${cy})`);
-    requestAnimationFrame(animate);
-  }
-  requestAnimationFrame(animate);
+//   // ================= ANIMATION =================
+//   function animate(time) {
+//     const t = time / 1000;
+//     const angle = baseAngle + amplitude * Math.sin(t * speed + phase);
+//     icon.setAttribute("transform", `rotate(${angle}, ${cx}, ${cy})`);
+//     requestAnimationFrame(animate);
+//   }
+//   requestAnimationFrame(animate);
 
-  // ================= EVENTS =================  
+//   // ================= EVENTS =================  
 
-    // Optional event handlers
-    icon.addEventListener("mouseenter", () => {
-      label.setAttribute("visibility", "visible")
-    });
+//     // Optional event handlers
+//     icon.addEventListener("mouseenter", () => {
+//       label.setAttribute("visibility", "visible")
+//     });
   
-    icon.addEventListener("mouseleave", () => {
-      label.setAttribute("visibility", "hidden")
-    });
+//     icon.addEventListener("mouseleave", () => {
+//       label.setAttribute("visibility", "hidden")
+//     });
 
 
-  icon.addEventListener("click", (e) => {
-    e.stopPropagation(); // Stop general click from propagating
-    console.log("Clicked Icon");
-    document.querySelector("#top-row-right-panel").style.width = "30%";
+//   icon.addEventListener("click", (e) => {
+//     e.stopPropagation(); // Stop general click from propagating
+//     console.log("Clicked Icon");
+//     document.querySelector("#left-column-bottom-panel").style.width = "30%";
     
-    for (let n = 0; n < 5; n++) {
-      const moon_element = document.querySelector(`#moon_${name}_${n}`);
-      moon_element.style.opacity = 1;
-    }
+//     for (let n = 0; n < 5; n++) {
+//       const moon_element = document.querySelector(`#moon_${name}_${n}`);
+//       moon_element.style.opacity = 1;
+//     }
     
-  });
-}
+//   });
+// }
 
 
 

@@ -1,0 +1,20 @@
+{
+    "icons" : {
+        "hand" : {
+            "moon_data" : [
+                {
+                    "title" : "alt.hypertext",
+                    "subtitle" : "the first announcement of the World Wide Web",
+                    "url"  : "https://web.archive.org/web/20130529231641/https://groups.google.com/group/alt.hypertext/msg/395f282a67a1916c",
+                    "year" : "1991",
+                    "text" : "Tim Berners-Lee published a short summary of the World Wide Web project on the newsgroup, alt.hypertex, explaining its purpose and how it worked, and inviting collaborators."},
+                {
+                    "title" : "World Wide Web",
+                    "subtitle" : "the first website",
+                    "url"  : "https://info.cern.ch/hypertext/WWW/TheProject.html",
+                    "year" : "1991",
+                    "text" : "TBL created the first website at CERN, the European Organization for Nuclear Research. It was hosted on TBL’s NeXT computer and linked to relevant CERN documents. The World Wide Web differed from other hypertext systems available at the time. For instance, that the Web required only unidirectional links rather than bidirectional ones, enabling someone to link to another resource without action by the owner of that resource."}                    
+            ]
+        }
+    }
+}

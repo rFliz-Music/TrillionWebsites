@@ -1,49 +1,40 @@
-// =========================
-// Timeline Renderer
-// =========================
+// Init
 import * as engine from "/modules/RenderEngine.js";
-import { attach_IconBehavior, attach_CurveBehavior } from "/modules/ComponentBehavior.js";
+import {attach_CurveBehavior} from "/modules/ComponentBehavior.js";
+import { DATA, load_data } from './modules/DataLoad.js';
 
 
-function createTimeline(containerId) {
-    const container = document.getElementById(containerId);
-    let ACTIVE_ICON = 'hand';
+
+// =======================================================================================
+// ================================== SVG CONTAINER ======================================
+// =======================================================================================
+async function createTimeline(containerId) {
+    const container = document.getElementById(containerId);    
   
     // Create SVG element
     const svgNS = "http://www.w3.org/2000/svg";
     const svg = document.createElementNS(svgNS, "svg");
 
 
-
-    // Responsive setup
+    // ================================== SVG CONTAINER ======================================
     svg.setAttribute("viewBox", "0 0 150 100"); // logical coordinates
     svg.setAttribute("preserveAspectRatio", "xMidYMid meet");     
     svg.style.width = "100%";
     svg.style.height = "100%";
     svg.style.display = "block";
     svg.style.background = "rgb(250 246 239 / 0%)";
-
-
     container.appendChild(svg);
-    // Clicks ANYWHERE on the TIMELINE
-    container.onclick = () => {
-        document.querySelector('#top-row-right-panel').style.width = "0%"      
 
-        // TURN THE MOONS OFF
-        for (let n = 0; n < 5; n++) {
-          const moon_element = document.querySelector(`#moon_${ACTIVE_ICON}_${n}`);
-          moon_element.style.opacity = 0;
-        }
 
-    }
+    // Container EVENTS
+    container.onclick = () => { reset_ui() }
 
   
-
     // ====================================== CURVE ======================================
     const curvePoints = {
-      p0: { x : 10,  y : 70},
-      p1: { x : 20,  y : 20 },
-      p2: { x : 120,  y : 70 },
+      p0: { x : 13,  y : 70},
+      p1: { x : 25,  y : 10 },
+      p2: { x : 120,  y : 90 },
       p3: { x : 130, y : 20 },
     };
   
@@ -78,7 +69,7 @@ function createTimeline(containerId) {
 
     // Subsets of the unit interval upon where the moons are allowed to appear
     const moon_ranges = [
-      {low: 0.25, high: 1, offset: 0},
+      {low: 0.4, high: 1, offset: 0},
       {low: 0.25, high: 1, offset: 3.25},
       {low: 0.25, high: 1, offset: 0},
       {low: 0.25, high: 1, offset: 3.5},
@@ -108,11 +99,16 @@ function createTimeline(containerId) {
 
       // ==== ICON IMAGE ====
       const icon = document.createElementNS(svgNS, "image");
+            icon.setAttribute("class", "icon");
             icon.setAttribute("href", `Icons/${icon_urls[i]}`);
+            icon.setAttribute("base_width", icon_width)
+            icon.setAttribute("base_height", icon_height)
             icon.setAttribute("width", icon_width);
             icon.setAttribute("height", icon_height);
             icon.setAttribute("x", -icon_width/2);
             icon.setAttribute("y", -icon_height/2);
+            icon.setAttribute("active", false)
+            icon.style.cursor = 'pointer'
       
       icon_coords.push({ x: pos.x, y: pos.y }); // Store icon coordinates 
       // = = = = = = = = = = =
@@ -125,13 +121,13 @@ function createTimeline(containerId) {
             label.setAttribute('transform', `translate(${label_coords[i].x}, ${label_coords[i].y})`);
             label.setAttribute('font-family', "Avenir Next")  
             label.setAttribute("font-size", "14%")   
-            label.setAttribute("visibility", "hidden")
+            label.style.opacity = 0;
       // = = = = = = = = 
       
       
       // ========= MOONS ===========
       const moons = document.createElementNS(svgNS, "g"); 
-      const moons_size = 8
+      const moons_size = 4
       
       const moon_range = ((moon_ranges[i].high - moon_ranges[i].low) * Math.PI*2); // increment size
       const moon_dx = moon_range / 5; // increment size
@@ -147,70 +143,112 @@ function createTimeline(containerId) {
         const moon = document.createElementNS(svgNS, "image");
               moon.setAttribute("class", 'moon')  
               moon.setAttribute("id", `moon_${icon_names[i]}_${j}`)          
-              moon.setAttribute("href", `Icons/moon_${0}.png`)              
+              moon.setAttribute("href", `Icons/moon_${j}.png`)              
               moon.setAttribute("width", moons_size);
               moon.setAttribute("height", moons_size);
               moon.setAttribute("x", (Math.sin(moon_pos) * moon_radius) - (moons_size/2));
               moon.setAttribute("y", (Math.cos(moon_pos) * moon_radius) - (moons_size/2));                           
-            
-              
-              function moon_animate(time) {
-                const t = time / 1000;
-                // Do stuff here;
-                const radius_offset = (moon_radius + Math.sin(t + moon_phase) * 1) // Modulate radius
-                moon.setAttribute("x", (Math.sin(moon_pos) * radius_offset) - (moons_size/2));
-                moon.setAttribute("y", (Math.cos(moon_pos) * radius_offset) - (moons_size/2));
-                requestAnimationFrame(moon_animate);
-              }      
-              requestAnimationFrame(moon_animate);            
-              
-              moons.appendChild(moon)
-      }
-      // = = = = = = = = = = = = = =  
+              moon.style.cursor = 'pointer'                 
 
-      // attach_IconBehavior(icon, 0, 0, i*0.7, label, icon_names[i]); // Attach all behavior (animation, events
+
+
+        function moon_animate(time) {
+          const t = time / 1000;
+          // Do stuff here;
+          const radius_offset = (moon_radius + Math.sin(t + moon_phase) * 1) // Modulate radius
+          moon.setAttribute("x", (Math.sin(moon_pos) * radius_offset) - (moons_size/2));
+          moon.setAttribute("y", (Math.cos(moon_pos) * radius_offset) - (moons_size/2));
+          requestAnimationFrame(moon_animate);        
+        }      
+
+        requestAnimationFrame(moon_animate);            
+
+
+        // Moon Events
+        moon.addEventListener("mouseenter", (e) => {        
+          moon.setAttribute("width", moons_size * 1.15)         
+          moon.setAttribute("height", moons_size * 1.15)                        
+        });
+        
+        moon.addEventListener("mouseleave", (e) => {                      
+          moon.setAttribute("width", moons_size)         
+          moon.setAttribute("height", moons_size)         
+        });
+
+
+
+        moon.addEventListener('click', (e) => {
+          e.stopPropagation(); 
+          document.querySelector("#right-column-container").style.width = "40%";
+          
+
+          // Get the relevant moon data array
+          const icon_data = DATA.icons[icon_names[i]]["moon_data"]
+
+          document.querySelector("#sidePanel_title").innerHTML = icon_data[j]['title']
+          document.querySelector("#sidePanel_subtitle").innerHTML = icon_data[j]['subtitle']
+          document.querySelector("#sidePanel_text").innerHTML = icon_data[j]['text']
+          document.querySelector("#sidePanel_year").innerHTML = icon_data[j]['year']
+          document.querySelector("#sidePanel_embedded").setAttribute('src', icon_data[j]['url'])           
+        })
+        
+
+        moons.appendChild(moon);
+      }
+      // = = = = = = = = = = = = = = = 
+      
+
       const baseAngle = 0;      // center rotation
       const amplitude = 15;      // swing range
       const speed = 0.7;           // radians/sec (lower = slower)
       
 
       // ================= ANIMATION =================
-      function animate(time) {
+      function animate_icon(time) {
         const t = time / 1000;
         const angle = baseAngle + amplitude * Math.sin(t * speed + i*0.7);
         icon.setAttribute("transform", `rotate(${angle}, ${0}, ${0})`);
-        requestAnimationFrame(animate);
+        requestAnimationFrame(animate_icon);
       }
-      requestAnimationFrame(animate);
+      requestAnimationFrame(animate_icon);
 
       // ================= EVENTS =================  
 
-        // Optional event handlers
-        icon.addEventListener("mouseenter", () => {
-          label.setAttribute("visibility", "visible")
-        });
+      // Hover
+      icon.addEventListener("mouseenter", (e) => {
+        if (icon.getAttribute("active") === "false") {            
+          icon.setAttribute('width', icon_width * 1.03)
+          icon.setAttribute('height', icon_height * 1.03)
+        }                          
+        label.style.opacity = 1        
+      });
       
-        icon.addEventListener("mouseleave", () => {
-          label.setAttribute("visibility", "hidden")
-        });
+      icon.addEventListener("mouseleave", (e) => {            
+        // If this is not the currently active node 
+        icon.setAttribute('width', icon_width)
+        icon.setAttribute('height', icon_height)
+        if (icon.getAttribute("active") === "false") {            
+          label.style.opacity = 0;         
+        }                  
+      });
 
 
+      // On Icon Click
       icon.addEventListener("click", (e) => {
+        e.stopPropagation(); // Stop general click from propagating                
+        reset_ui()
+        
+        icon.setAttribute("active", true)
 
-        ACTIVE_ICON = icon_names[i]
-
-        e.stopPropagation(); // Stop general click from propagating
-        console.log("Clicked Icon");
-        // document.querySelector("#top-row-right-panel").style.width = "30%";
+        label.style.opacity = 1;
+        document.querySelector("#left-column-bottom-panel").style.height = "20%"; // change era text with
         
         // Turn the moons on!
         for (let n = 0; n < 5; n++) {
           const moon_element = document.querySelector(`#moon_${icon_names[i]}_${n}`);
           moon_element.style.opacity = 1;
-        }
-        
+        }        
       });
-
 
 
       // Append children to group
@@ -219,9 +257,6 @@ function createTimeline(containerId) {
       g.appendChild(moons);
       svg.appendChild(g);
     }
-
-
-
 
 
 
@@ -243,7 +278,7 @@ function createTimeline(containerId) {
     // Black circles = hide dashed line under icons
     icon_coords.forEach((icon) => {
       const circle = document.createElementNS(svgNS, "circle");
-      circle.setAttribute("cx", icon.x); // small offset to match icon center
+      circle.setAttribute("cx", icon.x); 
       circle.setAttribute("cy", icon.y );
       circle.setAttribute("r", 8); // radius of the transparent gap
       circle.setAttribute("fill", "black");
@@ -254,17 +289,73 @@ function createTimeline(containerId) {
     path.setAttribute("mask", "url(#iconMask)");
 
   }
+
+
+  function reset_ui() {  
+    // Collapse Panels
+    document.querySelector("#right-column-container").style.width = "0%";
+    document.querySelector("#left-column-bottom-panel").style.height = "0%"; // change era text with
+    
+    
+    // Set All Nodes Inactive
+    document.querySelectorAll('.icon').forEach((icon) => {         
+      icon.setAttribute('active', false)
+    })
   
+    // Hide All Moons
+    document.querySelectorAll('.moon').forEach((moon) => { moon.style.opacity = 0 })
+  
+    // Hide All Labels
+    document.querySelectorAll(".icon-label").forEach((label) => { 
+      label.style.opacity = 0;
+    })
+  }
+  
+
+
+// === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o
+// === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o
+// === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o
+
+
+function IntroPage_create() {
+  const container = document.querySelector('#introPage-container')          
+  const button = document.querySelector('#introPage_button')
+
+  button.onclick = (e) => {
+    console.log("Experience Started")
+    document.querySelector("#master-container").style.opacity = 1;
+    container.style.opacity = 0;
+    container.style.pointerEvents = "none";
+  }
+  
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
   // =========================
   // Usage
-  // =========================
-  window.onload = () => {  
-    createTimeline("top-row-left-panel");    
-  };
+  // =========================  
+  document.addEventListener("DOMContentLoaded", async () => {
+    // document.querySelector("#master-container").style.visibility = 'hidden'
+    await load_data();
+    await createTimeline("left-column-top-panel");
+    document.querySelector("#master-container").style.opacity = 0
+    IntroPage_create()
+    // createTimeline("left-column-top-panel");
+  });
   
 
 
-// Returns a randomized distribution of 
-  // function createMoonPositions()
