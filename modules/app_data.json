@@ -5,16 +5,215 @@
                 {
                     "title" : "alt.hypertext",
                     "subtitle" : "the first announcement of the World Wide Web",
-                    "url"  : "https://web.archive.org/web/20130529231641/https://groups.google.com/group/alt.hypertext/msg/395f282a67a1916c",
+                    "url"  : "https://web.archive.org/web/20130529231641/https://groups.google.com/group/alt.hypertext/msg/395f282a67a1916c",                    
                     "year" : "1991",
-                    "text" : "Tim Berners-Lee published a short summary of the World Wide Web project on the newsgroup, alt.hypertex, explaining its purpose and how it worked, and inviting collaborators."},
+                    "text" : "Tim Berners-Lee published a short summary of the World Wide Web project on the newsgroup, alt.hypertex, explaining its purpose and how it worked, and inviting collaborators."
+                },
                 {
                     "title" : "World Wide Web",
                     "subtitle" : "the first website",
-                    "url"  : "https://info.cern.ch/hypertext/WWW/TheProject.html",
+                    "url"  : "https://info.cern.ch/hypertext/WWW/TheProject.html",                    
                     "year" : "1991",
-                    "text" : "TBL created the first website at CERN, the European Organization for Nuclear Research. It was hosted on TBL’s NeXT computer and linked to relevant CERN documents. The World Wide Web differed from other hypertext systems available at the time. For instance, that the Web required only unidirectional links rather than bidirectional ones, enabling someone to link to another resource without action by the owner of that resource."}                    
-            ]
+                    "text" : "TBL created the first website at CERN, the European Organization for Nuclear Research. It was hosted on TBL’s NeXT computer and linked to relevant CERN documents. The World Wide Web differed from other hypertext systems available at the time. For instance, that the Web required only unidirectional links rather than bidirectional ones, enabling someone to link to another resource without action by the owner of that resource. TBL created the first website at CERN, the European Organization for Nuclear Research. It was hosted on TBL’s NeXT computer and linked to relevant CERN documents. The World Wide Web differed from other hypertext systems available at the time. For instance, that the Web required only unidirectional links rather than bidirectional ones, enabling someone to link to another resource without action by the owner of that resource."
+                },
+                {
+                    "title" : "Stanford Linear Accelerator Center (SLAC)",
+                    "subtitle" : "the third website and first website served out of North America ",
+                    "url"  : "https://web.archive.org/web/19961224151338/http://www1.slac.stanford.edu/",                    
+                    "year" : "1991",
+                    "text" : "Paul Kunz from the Stanford Linear Accelerator Center (SLAC) visited CERN in September 1991 and was enthralled by the Web. He brought the software back and worked with Stanford Librarian Louise Addis to create a website hosting its online database and digital catalogue of documents. This was the first web server outside of Europe and the first in North America."
+                },
+                {
+                    "title" : "XCoffee / Trojan Room Coffee Pot",
+                    "subtitle" : "the first webcam",
+                    "url"  : "https://www.cl.cam.ac.uk/coffee/coffee.html",                    
+                    "year" : "1991",
+                    "text" : "A coffee pot at the Computer Laboratory of the University of Cambridge was live broadcasted to all desktop computers on the local office network, to save people working in the building the disappointment of finding the coffee machine empty. It <a href=\"https://www.cl.cam.ac.uk/coffee/qsf/timeline.html\" target=\"_blank\">became the first webcam</a> when it was connected to the internet in 1993 and could be watched from anywhere."
+                },
+                {
+                    "title" : "Bluegrass Music News and Information",
+                    "subtitle" : "one of the first 60 websites, first music-based website",
+                    "url"  : "https://web.archive.org/web/19980709220136/http://www.banjo.com:80/",                    
+                    "year" : "1992",
+                    "text" : "A website dedicated to bluegrass music, lyrics, and chords. It changed its name to Banjo in 1992, and Cybergrass in 1995. The <a href='https://cybergrass.com/' target='_blank'>website remains available today</a>, making it one of the longest standing websites (it is under construction as of October 2025). "
+                }
+            ],
+            "era_data" : {
+                "title" : "1991 ~ 1992",
+                "text" : "Tim Berners-Lee invented the World Wide Web in 1989 while working at CERN (the European Organization for Nuclear Research). He submitted Information Management: A Proposal to his managers, which he said would be based on 'a large hypertext database with typed links'. His breakthrough came when he married hypertext to the internet, developing three crucial elements to the Web: the uniform resource locator (URL); the publishing language Hypertext Markup Language (HTML); and the Hypertext Transfer Protocol (HTTP). TBL published a short summary of the World Wide Web project on the newsgroup, alt.hypertex, to explain its purpose and how it worked, and invite collaborators. He went on to develop the first web server and the first web browser, WorldWideWeb. CERN, with TBL’s urging, committed its source code to the public domain in 1993. <br> <br> Through these creations, TBL had created a medium of global information that could be accessed worldwide by anyone connected to the Internet. <br> <br> <i>Note: The older websites on this timeline will not have been archived until 1996 or later. The versions displayed here are the earliest, working versions of the websites.</i>"
+            }
+        },
+        "compass" : {
+            "moon_data" : [
+                {
+                    "title" : "Cyberia Café",
+                    "subtitle" : "the first Internet café",
+                    "url" : "https://web.archive.org/web/19970607160145/http://www.cyberiacafe.net/",
+                    "year" : "1994",
+                    "text" : "The website of the <a href='https://www.vice.com/en/article/worlds-first-ever-cyber-cafe-cyberia-london/' target='_blank'>first Internet café in the world</a>. Cyberia opened its doors in London in September 1994 and though it was intended as a space for women to surf the Web, it was open to all. From there the idea caught on and cyber cafés opened up all over the world."
+                },
+                {
+                    "title" : "PizzaNet",
+                    "subtitle" : "allegedly the first website to sell a physical product",
+                    "url" : "https://web.archive.org/web/19990204050612/http://www.pizza.net/",
+                    "year" : "1994",
+                    "text" : "Pizza Hut announced a pilot program to take pizza orders in Santa Cruz, California through their new website, PizzaNet. In their press release, the company <a href='https://web.archive.org/web/20020301132237/http://www.interesting-people.org/archives/interesting-people/199408 msg00057.html' target='_blank'>describes their killer app</a> with detailed instructions on how to place the order. It details how to connect to the internet and use the website — and even shares the physical location of the central server, which was in Wichita, Kansas at the time. Many consider it to be the first website to sell a physical product, though <a href='https://web.archive.org/web/20251012061947/https://www.nytimes.com/1994/08/12/business/attention-shoppers-internet-is-open.html' target='_blank'>that’s contested</a>."
+                },
+                {
+                    "title" : "GeoCities",
+                    "subtitle" : "a free website hosting service known for striking user-created websites",
+                    "url" : "https://web.archive.org/web/19961025110134/http://www.geocities.com/",
+                    "year" : "1994",
+                    "text" : "In November 1994, David Bohnett and John Rezner created <i>Beverly Hills Internet</i> — which they soon after renamed <i>GeoCities</i>— to allow people to create and publish websites free of charge. For many, it gave people their first experience of coding a website and publishing content online. Its user-generated webpages were especially known to be colorful, expressive, and full of animated GIFs. In 1999, Yahoo! acquired Geocities when it was the third-most visited website on the internet. Geocities was shuttered in 2009 following failed attempts to monetize the service."
+                },
+                {
+                    "title" : "eBay",
+                    "subtitle" : "one of the first online marketplace and auction websites",
+                    "url" : "https://web.archive.org/web/19991007062815/http://www.ebay.com/",
+                    "year" : "1995",
+                    "text" : "Founded by Pierre Omidyar in September 1995 to make some extra cash. It was initially called AuctionWeb, and one of the first items he sold on the site was <a href=’https://www.ebayinc.com/stories/news/meet-the-buyer-of-the-broken-laser-pointer/’ target=’_blank’>a broken laser pointer for $14.83</a>. Surprised, Omidyar contacted the winning bidder to ask if he understood that the laser pointer was broken; the buyer explained: 'I'm a collector of broken laser pointers.' eBay still has 132 million yearly active buyers worldwide and handled $73 billion in transactions in 2023."
+                },
+                {
+                    "title" : "Internet Archive",
+                    "subtitle" : "the Internet’s library hosting the largest archive of digital materials",
+                    "url" : "https://web.archive.org/web/19970126045828/http://www.archive.org/",
+                    "year" : "1996",
+                    "text" : "n May 1996, Brewster Kahle founded the Internet Archive, which operates the digital library, archive.org. The Wayback Machine was <a href=’https://web.archive.org/web/20011020003340/http://web.archive.org/’ target=’_blank’>launched a few years later in 2001</a>. The website gives free access to digitized media including archived websites, texts, images, videos, music, and software applications. It allows people to upload and download digital materials and archive websites. The Archive also works to preserve as much of the public web as possible using web crawlers to capture websites automatically. The Archive has been a pillar of the free and open internet movement, with a mission to provide 'universal access to all knowledge'."
+                }
+            ],
+            "era_data" : {
+                "title" : "1994 ~ 1996",
+                "text" : "TBL moved from CERN to the Massachusetts Institute of Technology in 1994 to found the World Wide Web Consortium (W3C), an international community devoted to developing open, interoperable web standards. These open standards — along with TBL’s commitment to keep the Web free and in the public domain — ensured that the Web’s format remained flexible and accessible. This led to it quickly proliferating around the world. <br> <br> The general public’s use of the Web began to pick up in 1993. By mid-1994, there were 2,738 websites, and by the end of 1994, the Web had 10,000 servers and 10 million users. <br> <br> <i>Note: The older websites on this timeline will not have been archived until 1996 or later. The versions displayed here are the earliest, working versions of the websites.</i>"
+            }
+        },
+        "cloud" : {
+            "moon_data" : [
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                },
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                },
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                },
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                },
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                }
+            ],
+            "era_data" : {
+                "title" : "2004 ~ 2006",
+                "text" : "The years following the Dot-com bubble marked a new era with the proliferation of interactive and multimedia websites. Those centered around user-generated content exploded in popularity. Microsoft’s digital encyclopedia <i>Encarta</i> surrendered to volunteer-edited Wikipedia. Likewise social media sites like Myspace and Facebook; social news sites like Digg and Reddit; and media sharing sites like Flickr, Vimeo, and Youtube, all began to permeate the Web. You no longer had to know how to code or administer a website to meet or share with others online — you only had to log in. <br><br> Within the decade since the general public started to use the Web, the number of websites online had grown by 19,000x — from 2738 websites in 1994 to about 52 million websites in 2004."
+            }
+        },
+        "chain" : {
+            "moon_data" : [
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                },
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                },
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                },
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                },
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                }
+            ],
+            "era_data" : {
+                "title" : "",
+                "text" : ""
+            }
+        },
+        "eye" : {
+            "moon_data" : [
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                },
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                },
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                },
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                },
+                {
+                    "title" : "",
+                    "subtitle" : "",
+                    "url" : "",
+                    "year" : "",
+                    "text" : ""
+                }
+            ],
+            "era_data" : {
+                "title" : "",
+                "text" : ""
+            }
         }
     }
 }

@@ -10,16 +10,10 @@ input[type="range"] {
     accent-color: #00ffaa;          
 }
 
+p {
+  font-size: 15px;
+}
 
-.left-column-panel {
-    /* display: none; */
-    margin: 10px;
-    position: relative;           
-    z-index:0;
-    /* border: 2px solid rgb(57, 80, 129); */
-    border-radius: 5px;
-    
-  }
 
 .icon {
     opacity: 1;
@@ -55,6 +49,31 @@ input[type="range"] {
 }
 
 
+.scroll-fade-content {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  overflow-y: auto;
+  background: transparent;  /* let WebGL background show through */
+
+  
+  /* The magic happens here */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 90%, transparent 100%);
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  transition: -webkit-mask-image 0.3s ease, mask-image 0.3s ease;
+}
+
+.scroll-inner {
+  padding: 10px;
+}
+
+
+
 
 #gl-canvas {
     position: absolute;
@@ -74,7 +93,7 @@ input[type="range"] {
     height: 100vh;
     z-index: 999;
     position: absolute;    
-    opacity: 1;
+    opacity: 0; /* start hidden */
     transition: opacity 0.3s ease-in
 
 }
@@ -104,7 +123,6 @@ input[type="range"] {
   font-family: "Avenir Next", sans-serif; 
 }
 
-/* #introPage_text_container */
 
 
 #introPage_button {
@@ -112,8 +130,46 @@ input[type="range"] {
   width: 100px;
   height: 100px;
   margin-top: 10%;
+  cursor: pointer;
+  filter: contrast(0.75);
+  /* Apply the animation */   
+  transform-origin: 50% 50%;
+  animation: swing-grow 2s ease-in-out infinite;  
 }
 
+@keyframes swing-grow {
+  0%, 100% {
+    transform: scale(1) rotate(2deg);
+  }  
+  50% {
+    transform: scale(1.05) rotate(-2deg);
+  }
+}
+
+#introPage_button:hover {
+  filter: contrast(1);
+}
+
+
+
+#introPage_text_container {
+  position: relative;
+
+}
+
+#introPage_text_main {
+
+}
+
+#introPage_text_quote {
+  position: relative;
+  font-size: 13px;
+  margin-top: 7%;
+  /* right: 50px; Adjust distance from the right edge */
+  text-align: right; /* Aligns the text within the attribution element to the right */
+
+  font-style: italic;  
+}
 
 
 /* ==================================================================== */
@@ -149,11 +205,16 @@ input[type="range"] {
     overflow: hidden;
 }
 
-#left-column-bottom-panel {      
+#left-column-bottom-panel {     
+    margin: 10px;
+    position: relative;           
+    z-index:0;    
+    border-radius: 5px;     
     width: 100%;
     height: 0;
     transition: height 0.5s ease;
-    overflow: hidden;
+    overflow: scroll;
+    margin-bottom: 5%;
 }
 
 
@@ -165,7 +226,7 @@ input[type="range"] {
 
 }
 
-#text-main {    
+#era-text {    
     margin-left: 10px;
     line-height: 2;
     font-family: "Avenir Next", sans-serif; 
@@ -173,32 +234,56 @@ input[type="range"] {
     display: block;
     /* color: rgb(141, 162, 234);       */
     z-index: 2;  
-    max-width: 80ch;    
+    max-width: 120ch;    
   }
 
 #right-column-container {
   display: flex;
+  margin-top: 4%;
   flex-direction: column;
   width: 0%;    
+  height: 85%;
   transition: width 0.5s ease;
-  overflow: hidden;
+  overflow: scroll;
   align-items: center;
 }  
 
 
 #sidePanel_embedded {
+  flex-shrink: 0;
   width: 90%;
-  height: 50%;
-  margin: 10px;
+  height: 65%;
+  margin-top: 5%;
   border: none;
-  box-shadow : 0px 1px 20px 6px #9f98a8;
+  box-shadow : 0px 1px 20px 2px #9f98a8;
   background-color: rgb(248, 229, 193);
 }
 
 #sidePanel_title {
   font-weight: 700;  
+  font-size: 20px;
 }
 
 #sidePanel_title {
   font-weight: 700;  
+}
+
+#sidePanel_url {
+  font-style: oblique;
+  color: blue;
+  text-decoration: underline;
+
+}
+
+#credits {
+  position: absolute;
+  font-family: "Avenir Next", sans-serif; 
+  font-size: 15px;
+  color: rgb(66, 66, 66);
+  top: 97%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; /* Centers the text horizontally within the div */
+  padding: 10px; /* Optional: Add some padding */
+  /* background-color: lightblue; For visualization */
 }

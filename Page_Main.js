@@ -9,7 +9,18 @@ import { DATA, load_data } from './modules/DataLoad.js';
 // ================================== SVG CONTAINER ======================================
 // =======================================================================================
 async function createTimeline(containerId) {
-    const container = document.getElementById(containerId);    
+    const container = document.getElementById(containerId);   
+
+    // Assign scroll fade Functionality to panels
+    document.querySelector("#left-column-bottom-panel").addEventListener('scroll', () => {
+      updateFades("#left-column-bottom-panel")
+    });
+
+    document.querySelector("#right-column-container").addEventListener('scroll', () => {
+      updateFades("#right-column-container")
+    });
+    
+      
   
     // Create SVG element
     const svgNS = "http://www.w3.org/2000/svg";
@@ -79,7 +90,7 @@ async function createTimeline(containerId) {
     const numIcons = 5; 
     const icon_names = ['hand', 'compass', 'cloud', 'chain', 'eye']   
     const icon_urls = ['0_hand.png', '1_compass.png', '2_cloud.png', '3_chain.png', '4_eye.png'];
-    const icon_labels = ['1990 ~ 1992', '1994 ~ 1996', '2004 ~ 2006', '2014 ~ 2016', '2023 ~ 2025'];
+    const icon_labels = ['1991 ~ 1992', '1994 ~ 1996', '2004 ~ 2006', '2014 ~ 2016', '2023 ~ 2025'];
 
     
     for (let i = 0; i < numIcons; i++) {
@@ -128,12 +139,13 @@ async function createTimeline(containerId) {
       // ========= MOONS ===========
       const moons = document.createElementNS(svgNS, "g"); 
       const moons_size = 4
+      const moons_num = 5
       
       const moon_range = ((moon_ranges[i].high - moon_ranges[i].low) * Math.PI*2); // increment size
       const moon_dx = moon_range / 5; // increment size
       let moon_curr = moon_ranges[i].low;
 
-      for (let j = 0; j < (5); j++) {
+      for (let j = 0; j < (moons_num); j++) {
         const moon_radius = 12;
         const moon_phase = Math.random() * 6; // random phase offset
         
@@ -179,8 +191,6 @@ async function createTimeline(containerId) {
 
         moon.addEventListener('click', (e) => {
           e.stopPropagation(); 
-          document.querySelector("#right-column-container").style.width = "40%";
-          
 
           // Get the relevant moon data array
           const icon_data = DATA.icons[icon_names[i]]["moon_data"]
@@ -188,8 +198,17 @@ async function createTimeline(containerId) {
           document.querySelector("#sidePanel_title").innerHTML = icon_data[j]['title']
           document.querySelector("#sidePanel_subtitle").innerHTML = icon_data[j]['subtitle']
           document.querySelector("#sidePanel_text").innerHTML = icon_data[j]['text']
-          document.querySelector("#sidePanel_year").innerHTML = icon_data[j]['year']
+          document.querySelector("#sidePanel_year").innerHTML = `- ${icon_data[j]['year']} -`
+          document.querySelector("#sidePanel_url").innerHTML = "link"
+          document.querySelector("#sidePanel_url").href = icon_data[j]['url']
           document.querySelector("#sidePanel_embedded").setAttribute('src', icon_data[j]['url'])           
+
+          // Bring Panel into view
+          document.querySelector("#right-column-container").style.width = "70%";
+          document.querySelector("#right-column-container").scrollTop = 0;
+          updateFades("#right-column-container")
+          
+        
         })
         
 
@@ -237,11 +256,20 @@ async function createTimeline(containerId) {
       icon.addEventListener("click", (e) => {
         e.stopPropagation(); // Stop general click from propagating                
         reset_ui()
+        const era_data = DATA.icons[icon_names[i]]["era_data"]
         
-        icon.setAttribute("active", true)
-
+        icon.setAttribute("active", true)        
+                
         label.style.opacity = 1;
-        document.querySelector("#left-column-bottom-panel").style.height = "30%"; // change era text with
+
+        // Change bottom panel width and display data
+        const bottom_panel = document.querySelector("#left-column-bottom-panel")
+              bottom_panel.scrollTop = 0; // reset scroll              
+              bottom_panel.style.height = "40%"; 
+              updateFades("#left-column-bottom-panel")
+
+        document.querySelector("#era-text").innerHTML = `<strong>${era_data.title}</strong> \&nbsp // \&nbsp  ${era_data.text}`; 
+
         
         // Turn the moons on!
         for (let n = 0; n < 5; n++) {
@@ -294,7 +322,7 @@ async function createTimeline(containerId) {
   function reset_ui() {  
     // Collapse Panels
     document.querySelector("#right-column-container").style.width = "0%";
-    document.querySelector("#left-column-bottom-panel").style.height = "0%"; // change era text with
+    document.querySelector("#left-column-bottom-panel").style.height = "0%"; // change era text width
     
     
     // Set All Nodes Inactive
@@ -313,6 +341,43 @@ async function createTimeline(containerId) {
   
 
 
+
+
+  function updateFades(elem_id) {
+    const elem = document.querySelector(elem_id);
+    if (!elem) return; // safety first
+  
+    const { scrollTop, scrollHeight, clientHeight } = elem;
+    const atTop = scrollTop <= 2;
+    const atBottom = scrollTop + clientHeight >= scrollHeight - 2;
+  
+    // --- Dynamic fade size ---
+    // e.g. fade about 40px worth of space, regardless of element height
+    const fadePx = 100;
+    const fadePercent = (fadePx / clientHeight) * 100; // convert to %
+  
+    // Clamp between 2% and 15% so it doesn't get extreme on very short/tall elements
+    const fadeZone = Math.max(2, Math.min(45, fadePercent));
+  
+    // Compute the dynamic gradient stops
+    const topFade = atTop
+      ? `transparent 0%, black 0%`
+      : `transparent 0%, black ${fadeZone}%`;
+    const bottomFade = atBottom
+      ? `black 100%, transparent 100%`
+      : `black ${100 - fadeZone}%, transparent 100%`;
+  
+    // Compose the mask gradient string
+    const maskGradient = `linear-gradient(to bottom, ${topFade}, ${bottomFade})`;
+  
+    // Apply mask (with prefix for Safari)
+    elem.style.webkitMaskImage = maskGradient;
+    elem.style.maskImage = maskGradient;
+  }
+
+
+
+
 // === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o
 // === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o
 // === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o
@@ -321,23 +386,17 @@ async function createTimeline(containerId) {
 function IntroPage_create() {
   const container = document.querySelector('#introPage-container')          
   const button = document.querySelector('#introPage_button')
+  
+  container.style.opacity = 1;
 
   button.onclick = (e) => {
     console.log("Experience Started")
     document.querySelector("#master-container").style.opacity = 1;
     container.style.opacity = 0;
     container.style.pointerEvents = "none";
-  }
-  
-
-
+    button.style.visibility = 'hidden';
+  };
 }
-
-
-
-
-
-
 
 
 
@@ -352,9 +411,9 @@ function IntroPage_create() {
     // document.querySelector("#master-container").style.visibility = 'hidden'
     await load_data();
     await createTimeline("left-column-top-panel");
+      
     document.querySelector("#master-container").style.opacity = 0
     IntroPage_create()
-    // createTimeline("left-column-top-panel");
   });
   
 
