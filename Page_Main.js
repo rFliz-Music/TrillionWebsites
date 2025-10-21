@@ -241,7 +241,7 @@ async function createTimeline(containerId) {
         icon.setAttribute("active", true)
 
         label.style.opacity = 1;
-        document.querySelector("#left-column-bottom-panel").style.height = "20%"; // change era text with
+        document.querySelector("#left-column-bottom-panel").style.height = "30%"; // change era text with
         
         // Turn the moons on!
         for (let n = 0; n < 5; n++) {

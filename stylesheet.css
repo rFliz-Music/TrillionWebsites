@@ -140,7 +140,7 @@ input[type="range"] {
     /* border: 2px solid rgb(57, 80, 129); */
     border-radius: 5px;
     margin : 20px;
-    height: 70vh;
+    /* height: 70vh; */
   }
 
 
@@ -160,6 +160,9 @@ input[type="range"] {
 #bottom-row-container {    
     /* border-radius: 5px; */
     /* margin : 20px; */
+    height: 0%;
+    flex-grow: 1;
+
 }
 
 #text-main {    
@@ -168,7 +171,7 @@ input[type="range"] {
     font-family: "Avenir Next", sans-serif; 
     position: relative;
     display: block;
-    color: rgb(141, 162, 234);      
+    /* color: rgb(141, 162, 234);       */
     z-index: 2;  
     max-width: 80ch;    
   }
@@ -189,7 +192,7 @@ input[type="range"] {
   margin: 10px;
   border: none;
   box-shadow : 0px 1px 20px 6px #9f98a8;
-
+  background-color: rgb(248, 229, 193);
 }
 
 #sidePanel_title {
