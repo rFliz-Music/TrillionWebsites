@@ -1,6 +1,6 @@
 // Init
-import * as engine from "/modules/RenderEngine.js";
-import {attach_CurveBehavior} from "/modules/ComponentBehavior.js";
+import * as engine from "./modules/RenderEngine.js";
+import {attach_CurveBehavior} from "./modules/ComponentBehavior.js";
 import { DATA, load_data } from './modules/DataLoad.js';
 
 
