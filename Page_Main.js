@@ -2,14 +2,15 @@
 import * as engine from "./modules/RenderEngine.js";
 import {attach_CurveBehavior} from "./modules/ComponentBehavior.js";
 import { DATA, load_data } from './modules/DataLoad.js';
-
+import {blobs} from "./BackgroundColors.js"
 
 
 // =======================================================================================
 // ================================== SVG CONTAINER ======================================
 // =======================================================================================
 async function createTimeline(containerId) {
-    const container = document.getElementById(containerId);   
+    const container = document.getElementById(containerId);  
+    
 
     // Assign scroll fade Functionality to panels
     document.querySelector("#left-column-bottom-panel").addEventListener('scroll', () => {
@@ -20,6 +21,8 @@ async function createTimeline(containerId) {
       updateFades("#right-column-container")
     });
     
+    // FLAGS to determine tutorial arrow state    
+    let FIRST_TIME_CLICK = true;
       
   
     // Create SVG element
@@ -87,7 +90,7 @@ async function createTimeline(containerId) {
       {low: 0.25, high: 1, offset: 0.5},
     ]
 
-    const numIcons = 5; 
+    const numIcons = 3; 
     const icon_names = ['hand', 'compass', 'cloud', 'chain', 'eye']   
     const icon_urls = ['0_hand.png', '1_compass.png', '2_cloud.png', '3_chain.png', '4_eye.png'];
     const icon_labels = ['1991 ~ 1992', '1994 ~ 1996', '2004 ~ 2006', '2014 ~ 2016', '2023 ~ 2025'];
@@ -111,6 +114,7 @@ async function createTimeline(containerId) {
       // ==== ICON IMAGE ====
       const icon = document.createElementNS(svgNS, "image");
             icon.setAttribute("class", "icon");
+            icon.setAttribute("id", `icon_${icon_names[i]}`);
             icon.setAttribute("href", `Icons/${icon_urls[i]}`);
             icon.setAttribute("base_width", icon_width)
             icon.setAttribute("base_height", icon_height)
@@ -188,7 +192,7 @@ async function createTimeline(containerId) {
         });
 
 
-
+        // On Moon Click
         moon.addEventListener('click', (e) => {
           e.stopPropagation(); 
 
@@ -201,21 +205,30 @@ async function createTimeline(containerId) {
           document.querySelector("#sidePanel_year").innerHTML = `- ${icon_data[j]['year']} -`
           document.querySelector("#sidePanel_url").innerHTML = "link"
           document.querySelector("#sidePanel_url").href = icon_data[j]['url']
-          document.querySelector("#sidePanel_embedded").setAttribute('src', icon_data[j]['url'])           
+
+
+          // iframe
+          document.querySelector("#sidePanel_embedded").setAttribute('src', "about:blank")    
+          setTimeout(() => {
+            document.querySelector("#sidePanel_embedded").setAttribute('src', icon_data[j]['url'])           
+          }, 50);
+          
 
           // Bring Panel into view
           document.querySelector("#right-column-container").style.width = "70%";
           document.querySelector("#right-column-container").scrollTop = 0;
           updateFades("#right-column-container")
-          
-        
+
+          // remove arrow's if any          
+          try { document.querySelector(".tutorialArrow").remove();} catch {}
+                            
         })
         
-
         moons.appendChild(moon);
+
       }
-      // = = = = = = = = = = = = = = = 
-      
+
+      // = = = = = = = = = = = = = = =       
 
       const baseAngle = 0;      // center rotation
       const amplitude = 15;      // swing range
@@ -231,7 +244,7 @@ async function createTimeline(containerId) {
       }
       requestAnimationFrame(animate_icon);
 
-      // ================= EVENTS =================  
+      // ================= ICON EVENTS =================  
 
       // Hover
       icon.addEventListener("mouseenter", (e) => {
@@ -254,30 +267,46 @@ async function createTimeline(containerId) {
 
       // On Icon Click
       icon.addEventListener("click", (e) => {
+        
         e.stopPropagation(); // Stop general click from propagating                
-        reset_ui()
-        const era_data = DATA.icons[icon_names[i]]["era_data"]
-        
-        icon.setAttribute("active", true)        
-                
-        label.style.opacity = 1;
 
-        // Change bottom panel width and display data
-        const bottom_panel = document.querySelector("#left-column-bottom-panel")
-              bottom_panel.scrollTop = 0; // reset scroll              
-              bottom_panel.style.height = "40%"; 
-              updateFades("#left-column-bottom-panel")
+        // If we're not clicking the same icon again        
+        if (e.target.getAttribute('active') == 'false' ) {
+            try { document.querySelector(".tutorialArrow").remove();} catch {}
+            const era_data = DATA.icons[icon_names[i]]["era_data"]
+            
+            reset_ui()
+            
+            icon.setAttribute("active", true)
+            label.style.opacity = 1;          
+            change_gradientColors();
 
-        document.querySelector("#era-text").innerHTML = `<strong>${era_data.title}</strong> \&nbsp // \&nbsp  ${era_data.text}`; 
+            // Change bottom panel width and display data
+            const bottom_panel = document.querySelector("#left-column-bottom-panel")
+                  bottom_panel.scrollTop = 0; // reset scroll              
+                  bottom_panel.style.height = "40%"; 
+                  updateFades("#left-column-bottom-panel")
 
-        
-        // Turn the moons on!
-        for (let n = 0; n < 5; n++) {
-          const moon_element = document.querySelector(`#moon_${icon_names[i]}_${n}`);
-          moon_element.style.opacity = 1;
-        }        
+            document.querySelector("#era-text").innerHTML = `<strong>${era_data.title}</strong> \&nbsp // \&nbsp  ${era_data.text}`; 
+
+            
+            // Turn the moons on!
+            for (let n = 0; n < 5; n++) {
+              const moon_element = document.querySelector(`#moon_${icon_names[i]}_${n}`);
+              moon_element.style.opacity = 1;
+            }        
+
+            // set tutorial arrow for 4th moon of the currently clicked icon
+            setTimeout(() => {
+              if (FIRST_TIME_CLICK) {
+                attach_tutorialArrow(document.querySelector(`#moon_${icon_names[i]}_4`), 200, 10);        
+                FIRST_TIME_CLICK = false;
+              }        
+            }, 1000)    
+        }
       });
-
+      
+      
 
       // Append children to group
       g.appendChild(icon);
@@ -324,6 +353,8 @@ async function createTimeline(containerId) {
     document.querySelector("#right-column-container").style.width = "0%";
     document.querySelector("#left-column-bottom-panel").style.height = "0%"; // change era text width
     
+    // Blank iframe
+    document.querySelector("#sidePanel_embedded").setAttribute('src', "about:blank")    
     
     // Set All Nodes Inactive
     document.querySelectorAll('.icon').forEach((icon) => {         
@@ -342,7 +373,7 @@ async function createTimeline(containerId) {
 
 
 
-
+  // To update fade mask based on scroll position per 
   function updateFades(elem_id) {
     const elem = document.querySelector(elem_id);
     if (!elem) return; // safety first
@@ -352,7 +383,7 @@ async function createTimeline(containerId) {
     const atBottom = scrollTop + clientHeight >= scrollHeight - 2;
   
     // --- Dynamic fade size ---
-    // e.g. fade about 40px worth of space, regardless of element height
+    // e.g. fade about 100px worth of space, regardless of element height
     const fadePx = 100;
     const fadePercent = (fadePx / clientHeight) * 100; // convert to %
   
@@ -378,6 +409,101 @@ async function createTimeline(containerId) {
 
 
 
+  // Given an element, attach a pointing arrow until the element is clicked
+  // Given an element, attach a pointing arrow until the element is clicked
+function attach_tutorialArrow(element, angleDeg = 80, radiusOffset = 5) {    
+    const arrow = document.createElement('img');
+    arrow.classList.add('tutorialArrow');
+    arrow.src = "./Icons/arrow_0.png";
+    arrow.style.position = 'absolute';
+    arrow.style.pointerEvents = 'none';
+    arrow.style.zIndex = 9999;
+    arrow.style.transformOrigin = 'center center';
+    
+
+    // define the animation (only once per document)
+    if (!document.getElementById('tutorialArrowStyle')) {
+      const style = document.createElement('style');
+      style.id = 'tutorialArrowStyle';
+      style.textContent = `
+        @keyframes arrowBop {
+          0%, 100% { transform: translate(0, 0) rotate(var(--arrow-rotation)); }
+          50% { transform: translate(var(--bop-x), var(--bop-y)) rotate(var(--arrow-rotation)); }
+        }
+        .tutorialArrow {
+          animation: arrowBop 2s ease-in-out infinite;
+        }`;
+      document.head.appendChild(style);
+    }
+
+    function positionArrow() {
+      const rect = element.getBoundingClientRect();
+      const arrowWidth = arrow.offsetWidth || 40;
+      const arrowHeight = arrow.offsetHeight || 40;
+
+      // Center of target element
+      const centerX = rect.left + rect.width / 2;
+      const centerY = window.scrollY + rect.top + rect.height / 2;
+
+      // Compute radius: half the diagonal of the element + optional offset
+      const baseRadius = Math.sqrt(rect.width ** 2 + rect.height ** 2) / 2 + radiusOffset;
+
+      // Convert angle to radians
+      const angleRad = (angleDeg * Math.PI) / 180;
+
+      // Arrow position on the bounding circle
+      const arrowX = centerX + baseRadius * Math.cos(angleRad) - arrowWidth / 2;
+      const arrowY = centerY + baseRadius * Math.sin(angleRad) - arrowHeight / 2;
+
+      // Position arrow
+      arrow.style.left = `${arrowX}px`;
+      arrow.style.top = `${arrowY}px`;
+
+      // Rotate arrow so it points toward the center
+      const rotationDeg = angleDeg + 90;
+      arrow.style.setProperty('--arrow-rotation', `${rotationDeg}deg`);
+
+      // Compute direction vector for bopping (toward center)
+      const bopDistance = 5; // pixels
+      const bopX = (-Math.cos(angleRad) * bopDistance).toFixed(2) + 'px';
+      const bopY = (-Math.sin(angleRad) * bopDistance).toFixed(2) + 'px';
+      arrow.style.setProperty('--bop-x', bopX);
+      arrow.style.setProperty('--bop-y', bopY);
+    }
+
+    // Position now and update on scroll/resize
+    positionArrow();
+    // window.addEventListener('scroll', positionArrow);
+    window.addEventListener('resize', positionArrow);
+
+    // Remove arrow on click 
+    element.addEventListener('click', () => {
+      arrow.remove();
+      // window.removeEventListener('scroll', positionArrow);
+      window.removeEventListener('resize', positionArrow);
+    });
+
+    document.body.appendChild(arrow);
+    
+    // force layout, then trigger fade-in
+    requestAnimationFrame(() => {
+      arrow.style.opacity = 1;
+    });
+}
+
+
+
+// BLOBS
+function change_gradientColors() {
+  for (let i = 0; i < blobs.length; i++) {    
+    blobs[i].color = [Math.random(), Math.random(), Math.random()]    
+  }
+}
+
+
+
+
+
 // === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o
 // === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o
 // === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o === o
@@ -386,19 +512,27 @@ async function createTimeline(containerId) {
 function IntroPage_create() {
   const container = document.querySelector('#introPage-container')          
   const button = document.querySelector('#introPage_button')
-  
+
+  // Tutorial arrow deletes itself after being selected
+  setTimeout(() => {
+    attach_tutorialArrow(button, 160, 0);
+  }, 1000)
+    
   container.style.opacity = 1;
 
   button.onclick = (e) => {
-    console.log("Experience Started")
+    console.log("App Started")
     document.querySelector("#master-container").style.opacity = 1;
     container.style.opacity = 0;
     container.style.pointerEvents = "none";
     button.style.visibility = 'hidden';
+
+    // Attach tutorial arrow to the first icon          
+    setTimeout(() => {
+      attach_tutorialArrow(document.querySelector("#icon_hand"), 130, 0);       
+    }, 1000)    
   };
 }
-
-
 
 
 
@@ -413,7 +547,8 @@ function IntroPage_create() {
     await createTimeline("left-column-top-panel");
       
     document.querySelector("#master-container").style.opacity = 0
-    IntroPage_create()
+    IntroPage_create() 
+
   });
   
 

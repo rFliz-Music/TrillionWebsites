@@ -31,6 +31,18 @@ p {
   }
 
 
+.tutorialArrow {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  pointer-events: none; /* don’t block clicks */  
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 1s ease-in
+}
+
+
+
 
 .card-text {
   width: 100%;
@@ -85,17 +97,16 @@ p {
 
 
 #introPage-container {
+    position: absolute;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    /* margin: 10%; */
+    align-items: center;    
     width: 100vw;
     height: 100vh;
-    z-index: 999;
-    position: absolute;    
+    z-index: 999;    
     opacity: 0; /* start hidden */
-    transition: opacity 0.3s ease-in
-
+    transition: opacity 0.3s ease-in;
+    overflow: hidden;
 }
 
 
@@ -129,7 +140,7 @@ p {
   /* position: relative;   */
   width: 100px;
   height: 100px;
-  margin-top: 10%;
+  margin-top: 5px;
   cursor: pointer;
   filter: contrast(0.75);
   /* Apply the animation */   
@@ -177,13 +188,14 @@ p {
 
 
 #master-container {
-    position: absolute;
+    position: relative;
     display: flex;
     flex-direction: row;
     width: 100vw;
     height: 100vh;
     opacity: 0;
-    transition: opacity 3s ease-in
+    transition: opacity 3s ease-in;
+    overflow : hidden;
   }
 
 
@@ -196,7 +208,6 @@ p {
     /* border: 2px solid rgb(57, 80, 129); */
     border-radius: 5px;
     margin : 20px;
-    /* height: 70vh; */
   }
 
 

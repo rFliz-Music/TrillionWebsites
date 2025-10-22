@@ -32,7 +32,7 @@ void main() {
 
 // ----------------- BLOB SETUP -----------------
 const numBlobs = 3;
-const blobs = [];
+export const blobs = [];
 
 for (let i = 0; i < numBlobs; i++) {
     blobs.push({
@@ -71,7 +71,7 @@ function animateBlobs(gl, program) {
 
 // start here
 function main() {
-    const canvas = document.getElementById('gl-canvas');
+    // const canvas = document.getElementById('gl-canvas');
     // canvas.width = window.innerWidth;
     // canvas.height = window.innerHeight;
 
@@ -106,8 +106,7 @@ main()
 // ----------------- GL INIT -----------------
 function initGL(canvasId) {
     const canvas = document.getElementById(canvasId);
-    // canvas.width = 100;
-    // canvas.height = 100;
+    
 
     const gl = canvas.getContext('webgl2');
     if (!gl) throw new Error("WebGL2 not supported");

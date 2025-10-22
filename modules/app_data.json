@@ -3,18 +3,18 @@
         "hand" : {
             "moon_data" : [
                 {
-                    "title" : "alt.hypertext",
-                    "subtitle" : "the first announcement of the World Wide Web",
-                    "url"  : "https://web.archive.org/web/20130529231641/https://groups.google.com/group/alt.hypertext/msg/395f282a67a1916c",                    
-                    "year" : "1991",
-                    "text" : "Tim Berners-Lee published a short summary of the World Wide Web project on the newsgroup, alt.hypertex, explaining its purpose and how it worked, and inviting collaborators."
+                    "title" : "Bluegrass Music News and Information",
+                    "subtitle" : "one of the first 60 websites, first music-based website",
+                    "url"  : "https://web.archive.org/web/19980709220136/http://www.banjo.com:80/",                    
+                    "year" : "1992",
+                    "text" : "A website dedicated to bluegrass music, lyrics, and chords. It changed its name to Banjo in 1992, and Cybergrass in 1995. The website remains available today, making it one of the longest standing websites (it is under construction as of October 2025)."
                 },
                 {
-                    "title" : "World Wide Web",
-                    "subtitle" : "the first website",
-                    "url"  : "https://info.cern.ch/hypertext/WWW/TheProject.html",                    
+                    "title" : "XCoffee / Trojan Room Coffee Pot",
+                    "subtitle" : "the first webcam",
+                    "url"  : "https://www.cl.cam.ac.uk/coffee/coffee.html",                    
                     "year" : "1991",
-                    "text" : "TBL created the first website at CERN, the European Organization for Nuclear Research. It was hosted on TBL’s NeXT computer and linked to relevant CERN documents. The World Wide Web differed from other hypertext systems available at the time. For instance, that the Web required only unidirectional links rather than bidirectional ones, enabling someone to link to another resource without action by the owner of that resource. TBL created the first website at CERN, the European Organization for Nuclear Research. It was hosted on TBL’s NeXT computer and linked to relevant CERN documents. The World Wide Web differed from other hypertext systems available at the time. For instance, that the Web required only unidirectional links rather than bidirectional ones, enabling someone to link to another resource without action by the owner of that resource."
+                    "text" : "A coffee pot at the Computer Laboratory of the University of Cambridge was live broadcasted to all desktop computers on the local office network, to save people working in the building the disappointment of finding the coffee machine empty. It became the first webcam when it was connected to the internet in 1993 and could be watched from anywhere."
                 },
                 {
                     "title" : "Stanford Linear Accelerator Center (SLAC)",
@@ -24,18 +24,18 @@
                     "text" : "Paul Kunz from the Stanford Linear Accelerator Center (SLAC) visited CERN in September 1991 and was enthralled by the Web. He brought the software back and worked with Stanford Librarian Louise Addis to create a website hosting its online database and digital catalogue of documents. This was the first web server outside of Europe and the first in North America."
                 },
                 {
-                    "title" : "XCoffee / Trojan Room Coffee Pot",
-                    "subtitle" : "the first webcam",
-                    "url"  : "https://www.cl.cam.ac.uk/coffee/coffee.html",                    
+                    "title" : "WorldWideWeb browser",
+                    "subtitle" : "the first browser and web page editor",
+                    "url"  : "https://worldwideweb.cern.ch/browser/",                    
                     "year" : "1991",
-                    "text" : "A coffee pot at the Computer Laboratory of the University of Cambridge was live broadcasted to all desktop computers on the local office network, to save people working in the building the disappointment of finding the coffee machine empty. It <a href=\"https://www.cl.cam.ac.uk/coffee/qsf/timeline.html\" target=\"_blank\">became the first webcam</a> when it was connected to the internet in 1993 and could be watched from anywhere."
+                    "text" : "TBL built the world’s first browser at CERN. In 1993 its source code was released into the public domain. Then a year later, it was renamed Nexus Browser. In celebration of the 30th anniversary of the WorldWideWeb, a group of developers and designers convened at CERN in 2019 to rebuild the original browser within a contemporary browser (shown below)."
                 },
                 {
-                    "title" : "Bluegrass Music News and Information",
-                    "subtitle" : "one of the first 60 websites, first music-based website",
-                    "url"  : "https://web.archive.org/web/19980709220136/http://www.banjo.com:80/",                    
-                    "year" : "1992",
-                    "text" : "A website dedicated to bluegrass music, lyrics, and chords. It changed its name to Banjo in 1992, and Cybergrass in 1995. The <a href='https://cybergrass.com/' target='_blank'>website remains available today</a>, making it one of the longest standing websites (it is under construction as of October 2025). "
+                    "title" : "World Wide Web",
+                    "subtitle" : "the first website",
+                    "url"  : "https://info.cern.ch/hypertext/WWW/TheProject.html",                    
+                    "year" : "1991",
+                    "text" : "TBL created the first website at CERN. It was hosted on TBL’s NeXT computer and linked to relevant CERN documents. The World Wide Web differed from other hypertext systems available at the time. A key difference was that the Web allowed unidirectional links rather than bidirectional ones, so that someone could link to another resource without action being taken by the owner of that resource."
                 }
             ],
             "era_data" : {
@@ -78,7 +78,7 @@
                     "subtitle" : "the Internet’s library hosting the largest archive of digital materials",
                     "url" : "https://web.archive.org/web/19970126045828/http://www.archive.org/",
                     "year" : "1996",
-                    "text" : "n May 1996, Brewster Kahle founded the Internet Archive, which operates the digital library, archive.org. The Wayback Machine was <a href=’https://web.archive.org/web/20011020003340/http://web.archive.org/’ target=’_blank’>launched a few years later in 2001</a>. The website gives free access to digitized media including archived websites, texts, images, videos, music, and software applications. It allows people to upload and download digital materials and archive websites. The Archive also works to preserve as much of the public web as possible using web crawlers to capture websites automatically. The Archive has been a pillar of the free and open internet movement, with a mission to provide 'universal access to all knowledge'."
+                    "text" : "In May 1996, Brewster Kahle founded the Internet Archive, which operates the digital library, archive.org. The Wayback Machine was <a href=’https://web.archive.org/web/20011020003340/http://web.archive.org/’ target=’_blank’>launched a few years later in 2001</a>. The website gives free access to digitized media including archived websites, texts, images, videos, music, and software applications. It allows people to upload and download digital materials and archive websites. The Archive also works to preserve as much of the public web as possible using web crawlers to capture websites automatically. The Archive has been a pillar of the free and open internet movement, with a mission to provide 'universal access to all knowledge'."
                 }
             ],
             "era_data" : {
@@ -89,39 +89,39 @@
         "cloud" : {
             "moon_data" : [
                 {
-                    "title" : "",
-                    "subtitle" : "",
-                    "url" : "",
-                    "year" : "",
-                    "text" : ""
+                    "title" : "Twitter",
+                    "subtitle" : "a microblogging and social network service",
+                    "url" : "https://web.archive.org/web/20061109073453/http://twitter.com/",
+                    "year" : "2006",
+                    "text" : "Twitter’s website was launched in July 2006 by four founders, Jack Dorsey, Noah Glass, Biz Stone, and Evan Williams in San Francisco, California. The original code name for the project was twttr, inspired by the name of Flickr and the five character length of SMS short codes in the US. The name was changed to Twitter when they were able to purchase the domain, twitter.com, months later. A signature characteristic of the service was that posts, AKA tweets, were limited to 140 characters in length. <br><br> For most of its history, 10% of users authored 80-90% of tweets. Its popularity grew very quickly. When the platform was showcased at the 2007 South by Southwest conference, Twitter’s usage grew from an average 20,000 tweets per day to 60,000 over the course of a week."
                 },
                 {
-                    "title" : "",
-                    "subtitle" : "",
-                    "url" : "",
-                    "year" : "",
-                    "text" : ""
+                    "title" : "Etsy",
+                    "subtitle" : "an online commerce website focused on handmade and vintage goods",
+                    "url" : "https://web.archive.org/web/20051101011553/http://etsy.com/",
+                    "year" : "2005",
+                    "text" : "The website was launched in 2005 by a small company called iospace. One of its three founders, Robert Kalin, said that the name Etsy was a nonsense word he chose to build the brand from scratch. He says he got the name from watching Federico Fellini’s 1963 film, <i>8 ½</i> and hearing the characters  say /“etsi/”, meaning /“oh yes/” in Italian. The website initially gained traction by releasing tools to help sellers gain exposure and traffic, including keyword tags and even Adobe Flash-visualizations. By the end of 2024, Etsy had over 100 million items in its marketplace and connected 8 million sellers with 96 million buyers. That same year, Etsy had $12.6 billion USD total sales on its platform."
                 },
                 {
-                    "title" : "",
-                    "subtitle" : "",
-                    "url" : "",
-                    "year" : "",
-                    "text" : ""
+                    "title" : "YouTube",
+                    "subtitle" : "an online video sharing platform ",
+                    "url" : "https://web.archive.org/web/20060701022704/http://www.youtube.com/",
+                    "year" : "2005",
+                    "text" : "Three former employees of PayPal founded Youtube in February 2005. One of the founders, Jawed Karim, said that the inspiration for Youtube came from the Super Bowl XXXVIII halftime show controversy in 2004 when Janet Jackson's breast was briefly exposed during the halftime show, and the fact that he could not easily find a video of the incident. YouTube’s other founders, Chad Hurley and Steve Chen, said that they originally envisioned it to be a video-based online dating site. To achieve this, they made craigslist ads looking for women to upload videos of themselves in exchange for $100. This plan was unsuccessful and they decided to turn it into a general video sharing service. By mid-2024, YouTube hosted approximately 14.8 billion videos in total. As of late 2025, it remains the second most visited site in the world."
                 },
                 {
-                    "title" : "",
-                    "subtitle" : "",
-                    "url" : "",
-                    "year" : "",
-                    "text" : ""
+                    "title" : "wikiHow",
+                    "subtitle" : "an online, collaboratively written how-to manual",
+                    "url" : "https://web.archive.org/web/20060813103046/http://www.wikihow.com/Main-Page",
+                    "year" : "2005",
+                    "text" : "Founder Jack Herrick aspired to make wikiHow the'largest how-to guide for everything'. Inspired by Wikipedia’s editing model, Herrick forked Mediawiki (the open source software underlying Wikipedia) and modified it to be a how-to manual. <a href=’https://web.archive.org/web/20210306063757/https://www.theatlantic.com/technology/archive/2019/11/wikihow-history-founder-jack-herrick-good-internet/601627/’ target=’_blank’>He launched the site on January 15, 2005</a> — the fourth anniversary of the birth of Wikipedia, to 'honor their gift'. By 2009, the six-employee business was seeing 20 million monthly views. wikiHow’s articles follow a standard format: a descriptive step-by-step process, usually accompanied by an image — all of them authored and edited by thousands of its users."
                 },
                 {
-                    "title" : "",
-                    "subtitle" : "",
-                    "url" : "",
-                    "year" : "",
-                    "text" : ""
+                    "title" : "Flickr",
+                    "subtitle" : "an image and video hosting and social network platform",
+                    "url" : "https://web.archive.org/web/20040615105558/http://www.flickr.com/",
+                    "year" : "2004",
+                    "text" : "A Vancouver-based company called Ludicorp founded Flickr in February 2004, which it built using tools it had originally created for a web-based massively multiplayer online (MMO) game it was developing. Originally it had a chat room called FlickrLive, but the feature was eventually dropped as the codebase moved away from its MMO origins. Flickr’s popular features include tagging, favoriting, and group albums. They also offer the option to use Creative Commons and public domain licenses — which can also be used to filter images when searching their collections."
                 }
             ],
             "era_data" : {
