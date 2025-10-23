@@ -6,7 +6,7 @@
     <title>Hello World Wide Web</title>
 
     <script src="./fmod/fmodstudio.js"></script>
-    <script src="./AudioEngine_FMOD.js"></script>
+    <script src="./AudioEngine_FMOD.js" type="module"></script>
     <script src="./BackgroundColors.js" type="module"></script>    
     <script src="./Page_Main.js" type="module"></script>
     <link rel="stylesheet" href="./stylesheet.css">
@@ -52,8 +52,11 @@
       <div id="sidePanel_year">1824 lol</div>
       <p id="sidePanel_text">Placeholder Text</p>
       <a id="sidePanel_url" target="_blank">www.url.io</a>
-      <iframe id="sidePanel_embedded" src="" bp></iframe>
-      <div>.</div>
+      <div id="sidepanel_embedded_container">
+          <div id="sidePanel_embedded_loadingMessage">Loading Content...</div>
+          <iframe id="sidePanel_embedded_iframe" src="" bp></iframe>
+      </div>      
+      
     </div>     
 
     <div id="credits">

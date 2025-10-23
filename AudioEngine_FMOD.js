@@ -1,11 +1,16 @@
 let studioSystem;
 let testEventInstance;
 
-FMOD = {};
+const FMODModuleGlobal = window.FMODModule;
+
+// Create FMOD instance
+const FMOD = {};
 FMOD.preRun = prerun;
 FMOD.onRuntimeInitialized = runFMOD;
 
-FMODModule(FMOD);  // Initialize FMOD WASM
+FMODModuleGlobal(FMOD);  // Initialize FMOD WASM
+
+
 
 function prerun() { 
     // Mount bank files into FMOD virtual FS
@@ -90,4 +95,13 @@ function minimalFmodTick() {
 
 
 
+
+// function to control filter Position :D
+export function modulateFilter(val) {    
+    if (studioSystem) {        
+        studioSystem.setParameterByName("MasterFilter", val, false);
+        console.log(`FMOD: Filter Parameter to ${val}`)
+        studioSystem.update();
+    }
+};
 

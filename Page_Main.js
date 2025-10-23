@@ -3,13 +3,14 @@ import * as engine from "./modules/RenderEngine.js";
 import {attach_CurveBehavior} from "./modules/ComponentBehavior.js";
 import { DATA, load_data } from './modules/DataLoad.js';
 import {blobs} from "./BackgroundColors.js"
+import { modulateFilter } from "./AudioEngine_FMOD.js";
 
 
 // =======================================================================================
-// ================================== SVG CONTAINER ======================================
+// ================================== MAIN RENDERING =====================================
 // =======================================================================================
 async function createTimeline(containerId) {
-    const container = document.getElementById(containerId);  
+    const container = document.getElementById(containerId);      
     
 
     // Assign scroll fade Functionality to panels
@@ -45,6 +46,8 @@ async function createTimeline(containerId) {
 
   
     // ====================================== CURVE ======================================
+
+    // After much deliberation, I decided to go for a cubic bezier approach :D 
     const curvePoints = {
       p0: { x : 13,  y : 70},
       p1: { x : 25,  y : 10 },
@@ -196,6 +199,9 @@ async function createTimeline(containerId) {
         moon.addEventListener('click', (e) => {
           e.stopPropagation(); 
 
+          // Set filter to 0
+          modulateFilter(0.0);
+
           // Get the relevant moon data array
           const icon_data = DATA.icons[icon_names[i]]["moon_data"]
 
@@ -207,11 +213,16 @@ async function createTimeline(containerId) {
           document.querySelector("#sidePanel_url").href = icon_data[j]['url']
 
 
-          // iframe
-          document.querySelector("#sidePanel_embedded").setAttribute('src', "about:blank")    
-          setTimeout(() => {
-            document.querySelector("#sidePanel_embedded").setAttribute('src', icon_data[j]['url'])           
+          // iframe   
+          const embedded_iframe = document.querySelector("#sidePanel_embedded_iframe");
+          const overlay = document.querySelector("#sidePanel_embedded_loadingMessage");
+          
+
+          setTimeout(() => {            
+            embedded_iframe.setAttribute('src', icon_data[j]['url'])           
+            loadIframe(embedded_iframe, overlay, icon_data[j]['url'])            
           }, 50);
+
           
 
           // Bring Panel into view
@@ -267,20 +278,25 @@ async function createTimeline(containerId) {
 
       // On Icon Click
       icon.addEventListener("click", (e) => {
-        
-        e.stopPropagation(); // Stop general click from propagating                
+
+        e.stopPropagation(); // Stop general click from propagating   
+                 
 
         // If we're not clicking the same icon again        
-        if (e.target.getAttribute('active') == 'false' ) {
+        if (e.target.getAttribute('active') == 'false' ) {            
+
             try { document.querySelector(".tutorialArrow").remove();} catch {}
             const era_data = DATA.icons[icon_names[i]]["era_data"]
             
             reset_ui()
+
+            // Set audio filter to mid point and change colors
+            modulateFilter(0.5);    
+            change_gradientColors();
             
             icon.setAttribute("active", true)
             label.style.opacity = 1;          
-            change_gradientColors();
-
+            
             // Change bottom panel width and display data
             const bottom_panel = document.querySelector("#left-column-bottom-panel")
                   bottom_panel.scrollTop = 0; // reset scroll              
@@ -348,13 +364,39 @@ async function createTimeline(containerId) {
   }
 
 
+
+
+// ========================================================================================
+
+
+// Helper to load a new URL safely
+function loadIframe(iframe, loadingMsg, url) {
+  // Show loading overlay
+  loadingMsg.style.display = 'flex';            
+
+  // Remove any previous listener (to avoid duplicates)
+  iframe.onload = null;
+
+  // Use a small trick to make sure we only react to *this* load event
+  iframe.onload = () => {loadingMsg.style.display = 'none'};
+
+  // Assign a timestamp query param to ensure cache doesn’t skip load            
+  iframe.src = url
+}
+
+
+
+
   function reset_ui() {  
     // Collapse Panels
     document.querySelector("#right-column-container").style.width = "0%";
     document.querySelector("#left-column-bottom-panel").style.height = "0%"; // change era text width
+
+    // Set audio filter to max
+    modulateFilter(1.0)
     
     // Blank iframe
-    document.querySelector("#sidePanel_embedded").setAttribute('src', "about:blank")    
+    document.querySelector("#sidePanel_embedded_iframe").setAttribute('src', "about:blank")    
     
     // Set All Nodes Inactive
     document.querySelectorAll('.icon').forEach((icon) => {         
@@ -526,6 +568,8 @@ function IntroPage_create() {
     container.style.opacity = 0;
     container.style.pointerEvents = "none";
     button.style.visibility = 'hidden';
+
+    modulateFilter(1.0);    
 
     // Attach tutorial arrow to the first icon          
     setTimeout(() => {
