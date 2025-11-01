@@ -3,7 +3,7 @@ import * as engine from "./modules/RenderEngine.js";
 import {attach_CurveBehavior} from "./modules/ComponentBehavior.js";
 import { DATA, load_data } from './modules/DataLoad.js';
 import {blobs} from "./BackgroundColors.js"
-import { modulateFilter } from "./AudioEngine_FMOD.js";
+import { modulateFilter, play_sfx } from "./AudioEngine_FMOD.js";
 
 
 // =======================================================================================
@@ -93,10 +93,10 @@ async function createTimeline(containerId) {
       {low: 0.25, high: 1, offset: 0.5},
     ]
 
-    const numIcons = 3; 
+    const numIcons = 4; 
     const icon_names = ['hand', 'compass', 'cloud', 'chain', 'eye']   
     const icon_urls = ['0_hand.png', '1_compass.png', '2_cloud.png', '3_chain.png', '4_eye.png'];
-    const icon_labels = ['1991 ~ 1992', '1994 ~ 1996', '2004 ~ 2006', '2014 ~ 2016', '2023 ~ 2025'];
+    const icon_labels = ['1991 ~ 1992', '1994 ~ 1996', '2004 ~ 2006', '2012 ~ 2016', '2023 ~ 2025'];
 
     
     for (let i = 0; i < numIcons; i++) {
@@ -185,9 +185,20 @@ async function createTimeline(containerId) {
 
         // Moon Events
         moon.addEventListener("mouseenter", (e) => {        
-          moon.setAttribute("width", moons_size * 1.15)         
-          moon.setAttribute("height", moons_size * 1.15)                        
+          moon.setAttribute("width", moons_size * 1.15);         
+          moon.setAttribute("height", moons_size * 1.15);     
+          
+
+          // *TO_DO* This is inefficient ...
+          // Computed style fetchng to check if moons are visible... should check a global state variable
+          const moon_ComputedStyle = window.getComputedStyle(moon) 
+          if (moon_ComputedStyle.getPropertyValue('opacity') == 1)
+          {
+            play_sfx("UI_MoonHover"); // Play the clicky sfx                      
+          }
         });
+
+        
         
         moon.addEventListener("mouseleave", (e) => {                      
           moon.setAttribute("width", moons_size)         
@@ -197,7 +208,12 @@ async function createTimeline(containerId) {
 
         // On Moon Click
         moon.addEventListener('click', (e) => {
-          e.stopPropagation(); 
+          e.stopPropagation();        
+
+          // Turn off previous moon colors and set current color
+          document.querySelectorAll('.moon').forEach((m) => { m.style.filter = "" })          
+          moon.style.filter = "invert(49%) sepia(98%) saturate(412%) hue-rotate(120deg) brightness(94%) contrast(92%)"; 
+          
 
           // Set filter to 0
           modulateFilter(0.0);
@@ -281,7 +297,6 @@ async function createTimeline(containerId) {
 
         e.stopPropagation(); // Stop general click from propagating   
                  
-
         // If we're not clicking the same icon again        
         if (e.target.getAttribute('active') == 'false' ) {            
 
@@ -296,6 +311,8 @@ async function createTimeline(containerId) {
             
             icon.setAttribute("active", true)
             label.style.opacity = 1;          
+
+            play_sfx(`UI_Icon_${icon_names[i]}Click`);
             
             // Change bottom panel width and display data
             const bottom_panel = document.querySelector("#left-column-bottom-panel")
@@ -404,7 +421,10 @@ function loadIframe(iframe, loadingMsg, url) {
     })
   
     // Hide All Moons
-    document.querySelectorAll('.moon').forEach((moon) => { moon.style.opacity = 0 })
+    document.querySelectorAll('.moon').forEach((moon) => { 
+      moon.style.opacity = 0; 
+      moon.style.filter = "";
+    })    
   
     // Hide All Labels
     document.querySelectorAll(".icon-label").forEach((label) => { 

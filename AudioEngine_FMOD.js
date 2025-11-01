@@ -41,9 +41,10 @@ function runFMOD() {
     console.log("Bank loaded");
 
 
-    // Get the event description
+    // Get the event descriptions
     const eventDesc = {};
     check(studioSystem.getEvent("event:/MainMusic_play", eventDesc));
+
 
     // Create an instance of the event
     const eventInst = {};
@@ -63,6 +64,21 @@ function runFMOD() {
     update()
     setInterval(update, 100); // Call every 100 miliseconds
 
+}
+
+
+export function play_sfx(event_name) {
+     // Get the event descriptions
+     const eventDesc = {};
+     check(studioSystem.getEvent(`event:/${event_name}`, eventDesc));
+ 
+ 
+     // Create an instance of the event
+     const eventInst = {};
+     check(eventDesc.val.createInstance(eventInst));
+     testEventInstance = eventInst.val;
+     testEventInstance.start();
+     studioSystem.update();
 }
 
 
@@ -100,7 +116,7 @@ function minimalFmodTick() {
 export function modulateFilter(val) {    
     if (studioSystem) {        
         studioSystem.setParameterByName("MasterFilter", val, false);
-        console.log(`FMOD: Filter Parameter to ${val}`)
+        // console.log(`FMOD: Filter Parameter to ${val}`)
         studioSystem.update();
     }
 };
